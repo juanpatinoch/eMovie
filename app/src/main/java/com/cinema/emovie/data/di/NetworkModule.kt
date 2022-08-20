@@ -7,12 +7,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@Singleton
-@InstallIn(SingletonComponent::class)
+//@Singleton
+//@InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    @Singleton
-    @Provides
+    //@Singleton
+    //@Provides
     fun retrofitProvider() = Retrofit
         .Builder()
         .baseUrl("https://api.themoviedb.org/3/")
