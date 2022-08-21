@@ -7,10 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.cinema.emovie.common.network.ApiResponse
 import com.cinema.emovie.data.local.entities.toDatabaseDao
 import com.cinema.emovie.data.model.MovieListModel
+import com.cinema.emovie.data.model.MovieModel
 import com.cinema.emovie.domain.get_trending.GetTrendingAPI
 import com.cinema.emovie.domain.get_upcoming.GetUpcomingAPI
+import com.cinema.emovie.domain.get_upcoming.GetUpcomingLocal
 import com.cinema.emovie.domain.get_upcoming.SetUpcomingLocal
-import com.cinema.emovie.domain.model.Movie
 import com.cinema.emovie.domain.model.toDomain
 import com.cinema.emovie.ui.home.status.HomeStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,8 +22,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getUpcomingAPI: GetUpcomingAPI,
+    private val getUpcomingLocal: GetUpcomingLocal,
     private val setUpcomingLocal: SetUpcomingLocal,
+    private val getUpcomingAPI: GetUpcomingAPI,
     private val getTrendingAPI: GetTrendingAPI
 ) : ViewModel() {
 
@@ -33,15 +35,25 @@ class HomeViewModel @Inject constructor(
         getUpcoming()
     }
 
-    private fun getUpcoming() = viewModelScope.launch(Dispatchers.IO) {
+    private fun getUpcoming() {
+        getUpcomingLocal()
+        getUpcomingAPI()
+    }
+
+    private fun getUpcomingLocal() = viewModelScope.launch(Dispatchers.Main) {
+        getUpcomingLocal.invoke().collect {
+            setUIStatus(HomeStatus.SuccessGetUpcoming(it.toDomain()))
+        }
+    }
+
+    private fun getUpcomingAPI() = viewModelScope.launch(Dispatchers.IO) {
         validateUpComingResponse(getUpcomingAPI.invoke())
     }
 
     private suspend fun validateUpComingResponse(response: ApiResponse<MovieListModel>) {
         when (response) {
             is ApiResponse.Success -> {
-                setLocalData(response.data.toDomain())
-                //setUIStatus(HomeStatus.SuccessGetUpcoming(response.data.toDomain()))
+                setLocalData(response.data.movieList)
             }
             is ApiResponse.Failure -> {
                 setUIStatus(HomeStatus.Failure(response.exception))
@@ -49,7 +61,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private suspend fun setLocalData(movies: List<Movie>?) {
+    private suspend fun setLocalData(movies: List<MovieModel>?) {
         movies?.toDatabaseDao()?.let {
             setUpcomingLocal.invoke(it)
         }

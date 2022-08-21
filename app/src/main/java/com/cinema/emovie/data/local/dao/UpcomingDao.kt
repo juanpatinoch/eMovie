@@ -5,12 +5,13 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.cinema.emovie.data.local.entities.UpcomingEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UpcomingDao {
 
     @Query("SELECT * FROM upcoming ORDER BY popularity DESC")
-    suspend fun getAllUpcoming(): List<UpcomingEntity>
+    fun getAllUpcoming(): Flow<List<UpcomingEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllUpcoming(movies: List<UpcomingEntity>)

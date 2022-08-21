@@ -1,6 +1,6 @@
 package com.cinema.emovie.domain.model
 
-import com.cinema.emovie.data.model.MovieListModel
+import com.cinema.emovie.data.local.entities.UpcomingEntity
 
 data class Movie(
     val adult: Boolean?,
@@ -18,7 +18,7 @@ data class Movie(
     val voteCount: Int?
 )
 
-fun MovieListModel.toDomain() = this.movieList?.map {
+fun List<UpcomingEntity>.toDomain() = this.map {
     Movie(
         it.adult,
         it.backdropPath,
@@ -27,7 +27,7 @@ fun MovieListModel.toDomain() = this.movieList?.map {
         it.overview,
         it.posterPath,
         it.mediaType,
-        it.genreIds,
+        it.genreIds?.map { num -> num.toInt() } as ArrayList<Int>,
         it.popularity,
         it.releaseDate,
         it.video,

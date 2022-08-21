@@ -3,10 +3,10 @@ package com.cinema.emovie.domain.get_upcoming
 import com.cinema.emovie.data.repository.upcoming.UpcomingRepository
 import javax.inject.Inject
 
-class GetUpcomingAPI @Inject constructor(
+class GetUpcomingLocal @Inject constructor(
     private val upcomingRepository: UpcomingRepository
 ) {
 
-    suspend fun invoke() = upcomingRepository.getUpcomingDataSource()
+    fun invoke() = upcomingRepository.getUpcomingLocal()
 
 }

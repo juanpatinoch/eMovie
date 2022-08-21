@@ -1,4 +1,4 @@
-package com.cinema.emovie.data.network.get_upcoming
+package com.cinema.emovie.data.network.upcoming
 
 import com.cinema.emovie.common.network.ApiResponse
 import com.cinema.emovie.data.model.ApiKeyModel
@@ -6,7 +6,7 @@ import com.cinema.emovie.data.model.MovieListModel
 import com.cinema.emovie.data.network.ApiServices
 import javax.inject.Inject
 
-class GetUpcomingDataSource @Inject constructor(
+class UpcomingDataSource @Inject constructor(
     private val apiServices: ApiServices,
     private val apiKeyModel: ApiKeyModel
 ) {

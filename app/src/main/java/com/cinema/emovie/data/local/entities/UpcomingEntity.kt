@@ -3,7 +3,7 @@ package com.cinema.emovie.data.local.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.cinema.emovie.domain.model.Movie
+import com.cinema.emovie.data.model.MovieModel
 
 @Entity(tableName = "upcoming")
 data class UpcomingEntity(
@@ -36,7 +36,7 @@ data class UpcomingEntity(
     val voteCount: Int?
 )
 
-fun List<Movie>.toDatabaseDao() = this.map {
+fun List<MovieModel>?.toDatabaseDao() = this?.map {
     UpcomingEntity(
         it.id ?: 0,
         it.adult,
