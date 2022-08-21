@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 import com.cinema.emovie.common.POSTER_IMAGE_URL
 import com.cinema.emovie.data.model.MovieModel
 
-@Entity(tableName = "upcoming")
-data class UpcomingEntity(
+@Entity(tableName = "top_rated")
+data class TopRatedEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Int = 0,
@@ -37,8 +37,8 @@ data class UpcomingEntity(
     val voteCount: Int?
 )
 
-fun List<MovieModel>?.toUpcomingEntity() = this?.map {
-    UpcomingEntity(
+fun List<MovieModel>?.toTopRatedEntity() = this?.map {
+    TopRatedEntity(
         it.id ?: 0,
         it.adult,
         "$POSTER_IMAGE_URL${it.backdropPath}",

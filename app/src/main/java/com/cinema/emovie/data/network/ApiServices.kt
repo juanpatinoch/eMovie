@@ -14,6 +14,12 @@ interface ApiServices {
         @Header("Authorization") apiKey: String
     ): Response<MovieListModel>
 
+    @GET("/3/movie/top_rated")
+    @Headers("language:es-CO", "Content-Type:application/json;charset=utf-8")
+    suspend fun getTopRated(
+        @Header("Authorization") apiKey: String
+    ): Response<MovieListModel>
+
     @GET("/3/trending/all/week")
     @Headers("language:es-CO", "Content-Type:application/json;charset=utf-8")
     suspend fun getTrending(

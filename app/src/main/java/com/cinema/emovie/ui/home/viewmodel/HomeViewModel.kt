@@ -5,13 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cinema.emovie.common.network.ApiResponse
-import com.cinema.emovie.data.local.entities.toDatabaseDao
+import com.cinema.emovie.data.local.entities.toUpcomingEntity
 import com.cinema.emovie.data.model.MovieListModel
 import com.cinema.emovie.data.model.MovieModel
+import com.cinema.emovie.domain.model.toDomain
+import com.cinema.emovie.domain.top_rated.GetTopRatedAPI
+import com.cinema.emovie.domain.top_rated.GetTopRatedLocal
+import com.cinema.emovie.domain.top_rated.SetTopRatedLocal
 import com.cinema.emovie.domain.upcoming.GetUpcomingAPI
 import com.cinema.emovie.domain.upcoming.GetUpcomingLocal
 import com.cinema.emovie.domain.upcoming.SetUpcomingLocal
-import com.cinema.emovie.domain.model.toDomain
 import com.cinema.emovie.ui.home.status.HomeStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +26,10 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getUpcomingLocal: GetUpcomingLocal,
     private val setUpcomingLocal: SetUpcomingLocal,
-    private val getUpcomingAPI: GetUpcomingAPI
+    private val getTopRatedLocal: GetTopRatedLocal,
+    private val setTopRatedLocal: SetTopRatedLocal,
+    private val getUpcomingAPI: GetUpcomingAPI,
+    private val getTopRatedAPI: GetTopRatedAPI
 ) : ViewModel() {
 
     private val _homeStatus = MutableLiveData<HomeStatus>()
@@ -60,7 +66,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private suspend fun setUpcomingDataLocal(movies: List<MovieModel>?) {
-        movies?.toDatabaseDao()?.let {
+        movies?.toUpcomingEntity()?.let {
             setUpcomingLocal.invoke(it)
         }
     }
