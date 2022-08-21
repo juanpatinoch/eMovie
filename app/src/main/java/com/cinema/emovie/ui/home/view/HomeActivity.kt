@@ -19,10 +19,10 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getData()
+        getInitData()
     }
 
-    private fun getData() {
-        viewModel.getUp()
+    private fun getInitData() {
+        viewModel.getInitData()
     }
 }
