@@ -9,14 +9,18 @@ android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
+    def keystorePropertiesFile = rootProject.file("keystore.properties")
+    def keystoreProperties = new Properties()
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
     defaultConfig {
         applicationId "com.cinema.emovie"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "API_KEY", keystoreProperties["API_KEY"]
     }
 
     buildTypes {
@@ -60,6 +64,8 @@ dependencies {
     // Retrofit lib
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    //Log interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:4.8.0"
     //Coroutines Lib
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     //Dagger Hilt Lib
