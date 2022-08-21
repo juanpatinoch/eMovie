@@ -7,6 +7,11 @@ import retrofit2.http.Header
 
 interface ApiServices {
 
+    @GET("/3/movie/upcoming")
+    suspend fun getUpcoming(
+        @Header("Authorization") apiKey: String
+    ): Response<MovieListModel>
+
     @GET("/3/trending/all/week")
     suspend fun getTrending(
         @Header("Authorization") apiKey: String

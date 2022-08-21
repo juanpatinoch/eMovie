@@ -23,6 +23,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        viewModel.getTrending()
+        viewModel.getUp()
     }
 }
