@@ -1,5 +1,6 @@
 package com.cinema.emovie.domain.model
 
+import com.cinema.emovie.data.local.entities.TopRatedEntity
 import com.cinema.emovie.data.local.entities.UpcomingEntity
 
 data class Movie(
@@ -18,7 +19,27 @@ data class Movie(
     val voteCount: Int?
 )
 
+@JvmName("upcomingToDomain")
 fun List<UpcomingEntity>.toDomain() = this.map {
+    Movie(
+        it.adult,
+        it.backdropUrl,
+        it.id,
+        it.title,
+        it.overview,
+        it.posterUrl,
+        it.mediaType,
+        it.genreIds?.map { num -> num.toInt() } as ArrayList<Int>,
+        it.popularity,
+        it.releaseDate,
+        it.video,
+        it.voteAverage,
+        it.voteCount
+    )
+}
+
+@JvmName("topRatedToDomain")
+fun List<TopRatedEntity>.toDomain() = this.map {
     Movie(
         it.adult,
         it.backdropUrl,

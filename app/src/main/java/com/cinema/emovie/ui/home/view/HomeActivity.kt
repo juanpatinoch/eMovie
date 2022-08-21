@@ -33,6 +33,7 @@ class HomeActivity : AppCompatActivity() {
         viewModel.homeStatus.observe(this) {
             when (it) {
                 is HomeStatus.SuccessGetUpcoming -> setUpcomingData(it.movies)
+                is HomeStatus.SuccessGetTopRated -> setTopRatedData(it.movies)
                 is HomeStatus.Error -> {
                     //TODO: Pendiente hacer implementacion de errorView
                 }
@@ -45,9 +46,16 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setUpcomingData(movies: List<Movie>?) = with(binding) {
-
         val myAdapter = MovieAdapter({})
         recyclerViewUpcoming.apply {
+            adapter = myAdapter
+        }
+        myAdapter.submitList(movies)
+    }
+
+    private fun setTopRatedData(movies: List<Movie>?) = with(binding) {
+        val myAdapter = MovieAdapter({})
+        recyclerViewTopRated.apply {
             adapter = myAdapter
         }
         myAdapter.submitList(movies)

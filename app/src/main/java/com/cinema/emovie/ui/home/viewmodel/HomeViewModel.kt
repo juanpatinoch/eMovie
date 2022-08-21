@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cinema.emovie.common.network.ApiResponse
+import com.cinema.emovie.data.local.entities.toTopRatedEntity
 import com.cinema.emovie.data.local.entities.toUpcomingEntity
 import com.cinema.emovie.data.model.MovieListModel
 import com.cinema.emovie.data.model.MovieModel
@@ -37,6 +38,7 @@ class HomeViewModel @Inject constructor(
 
     fun getInitData() {
         getUpcomingData()
+        getTopRatedData()
     }
 
     private fun getUpcomingData() {
@@ -68,6 +70,38 @@ class HomeViewModel @Inject constructor(
     private suspend fun setUpcomingDataLocal(movies: List<MovieModel>?) {
         movies?.toUpcomingEntity()?.let {
             setUpcomingLocal.invoke(it)
+        }
+    }
+
+    private fun getTopRatedData() {
+        getTopRatedDataLocal()
+        getTopRatedDataAPI()
+    }
+
+    private fun getTopRatedDataLocal() = viewModelScope.launch(Dispatchers.Main) {
+        getTopRatedLocal.invoke().collect {
+            setUIStatus(HomeStatus.SuccessGetTopRated(it.toDomain()))
+        }
+    }
+
+    private fun getTopRatedDataAPI() = viewModelScope.launch(Dispatchers.IO) {
+        validateGetTopRatedDataAPIResponse(getTopRatedAPI.invoke())
+    }
+
+    private suspend fun validateGetTopRatedDataAPIResponse(response: ApiResponse<MovieListModel>) {
+        when (response) {
+            is ApiResponse.Success -> {
+                setTopRatedDataLocal(response.data.movieList)
+            }
+            is ApiResponse.Failure -> {
+                setUIStatus(HomeStatus.Error(response.exception))
+            }
+        }
+    }
+
+    private suspend fun setTopRatedDataLocal(movies: List<MovieModel>?) {
+        movies?.toTopRatedEntity()?.let {
+            setTopRatedLocal.invoke(it)
         }
     }
 
