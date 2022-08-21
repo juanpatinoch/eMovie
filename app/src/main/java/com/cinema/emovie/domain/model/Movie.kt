@@ -1,6 +1,6 @@
 package com.cinema.emovie.domain.model
 
-import com.cinema.emovie.data.local.entities.MovieEntity
+import com.cinema.emovie.data.local.entities.UpcomingEntity
 
 data class Movie(
     val adult: Boolean?,
@@ -18,7 +18,7 @@ data class Movie(
     val voteCount: Int?
 )
 
-fun List<MovieEntity>.toDomain() = this.map {
+fun List<UpcomingEntity>.toDomain() = this.map {
     Movie(
         it.adult,
         it.backdropUrl,

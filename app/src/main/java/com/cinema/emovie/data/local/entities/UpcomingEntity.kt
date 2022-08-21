@@ -7,7 +7,7 @@ import com.cinema.emovie.common.POSTER_IMAGE_URL
 import com.cinema.emovie.data.model.MovieModel
 
 @Entity(tableName = "upcoming")
-data class MovieEntity(
+data class UpcomingEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Int = 0,
@@ -38,7 +38,7 @@ data class MovieEntity(
 )
 
 fun List<MovieModel>?.toDatabaseDao() = this?.map {
-    MovieEntity(
+    UpcomingEntity(
         it.id ?: 0,
         it.adult,
         "$POSTER_IMAGE_URL${it.backdropPath}",
