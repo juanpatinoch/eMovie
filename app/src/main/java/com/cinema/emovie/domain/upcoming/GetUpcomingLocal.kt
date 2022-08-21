@@ -1,4 +1,4 @@
-package com.cinema.emovie.domain.get_upcoming
+package com.cinema.emovie.domain.upcoming
 
 import com.cinema.emovie.data.repository.upcoming.UpcomingRepository
 import javax.inject.Inject

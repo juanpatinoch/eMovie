@@ -8,9 +8,9 @@ import com.cinema.emovie.common.network.ApiResponse
 import com.cinema.emovie.data.local.entities.toDatabaseDao
 import com.cinema.emovie.data.model.MovieListModel
 import com.cinema.emovie.data.model.MovieModel
-import com.cinema.emovie.domain.get_upcoming.GetUpcomingAPI
-import com.cinema.emovie.domain.get_upcoming.GetUpcomingLocal
-import com.cinema.emovie.domain.get_upcoming.SetUpcomingLocal
+import com.cinema.emovie.domain.upcoming.GetUpcomingAPI
+import com.cinema.emovie.domain.upcoming.GetUpcomingLocal
+import com.cinema.emovie.domain.upcoming.SetUpcomingLocal
 import com.cinema.emovie.domain.model.toDomain
 import com.cinema.emovie.ui.home.status.HomeStatus
 import dagger.hilt.android.lifecycle.HiltViewModel

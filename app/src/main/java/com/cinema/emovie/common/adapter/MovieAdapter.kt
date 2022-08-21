@@ -8,7 +8,6 @@ import android.view.ViewGroup.MarginLayoutParams
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.cinema.emovie.common.POSTER_IMAGE_URL
 import com.cinema.emovie.common.loadUrl
 import com.cinema.emovie.common.toDP
 import com.cinema.emovie.databinding.ItemPosterBinding
@@ -39,7 +38,9 @@ class MovieAdapter(
 
             setCustomMargin(cardViewPoster, startMargin, endMargin)
 
-            imageViewPoster.loadUrl("$POSTER_IMAGE_URL${item.posterPath}")
+            item.posterUrl?.let {
+                imageViewPoster.loadUrl(it)
+            }
             cardViewPoster.setOnClickListener {
                 onItemClick.invoke(item)
             }

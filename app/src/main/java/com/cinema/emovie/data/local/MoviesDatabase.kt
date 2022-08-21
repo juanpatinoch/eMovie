@@ -5,13 +5,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.cinema.emovie.common.local.Converters
 import com.cinema.emovie.data.local.dao.UpcomingDao
-import com.cinema.emovie.data.local.entities.UpcomingEntity
+import com.cinema.emovie.data.local.entities.MovieEntity
 
 
 @Database(
     entities = [
-        UpcomingEntity::class
-    ], version = 1
+        MovieEntity::class
+    ], version = 2
 )
 @TypeConverters(Converters::class)
 abstract class MoviesDatabase : RoomDatabase() {

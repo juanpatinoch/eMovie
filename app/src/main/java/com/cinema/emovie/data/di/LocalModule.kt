@@ -20,8 +20,10 @@ object LocalModule {
         Room.databaseBuilder(
             context,
             MoviesDatabase::class.java,
-            "movies_database"
-        ).build()
+            "emovie_database"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Singleton
     @Provides
