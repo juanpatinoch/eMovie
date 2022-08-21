@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="emovie_0dp">0dp</dimen>
+    <dimen name="emovie_8dp">8dp</dimen>
+    <dimen name="emovie_16dp">16dp</dimen>
+    <dimen name="emovie_18dp">18dp</dimen>
+    <dimen name="emovie_20dp">20dp</dimen>
+    <dimen name="emovie_24dp">24dp</dimen>
+    <dimen name="emovie_25dp">25dp</dimen>
+    <dimen name="emovie_30dp">30dp</dimen>
+    <dimen name="emovie_130dp">130dp</dimen>
+    <dimen name="emovie_180dp">180dp</dimen>
+</resources>

@@ -6,4 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.view.HomeActivity">
 
+    <TextView
+        android:id="@+id/text_view_upcoming_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/emovie_25dp"
+        android:layout_marginTop="@dimen/emovie_30dp"
+        android:text="@string/upcoming_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_upcoming"
+        android:layout_width="@dimen/emovie_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/emovie_20dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_upcoming_title"
+        tools:ignore="RtlSymmetry"
+        tools:listitem="@layout/item_poster" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

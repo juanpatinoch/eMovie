@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">eMovie</string>
+    <string name="upcoming_title">Próximos estrenos</string>
 </resources>
