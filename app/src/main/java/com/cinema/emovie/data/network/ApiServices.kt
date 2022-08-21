@@ -9,13 +9,13 @@ import retrofit2.http.Headers
 interface ApiServices {
 
     @GET("/3/movie/upcoming")
-    @Headers("language:es-CO", "Content-Type:application/json", "charset=utf-8")
+    @Headers("language:es-CO", "Content-Type:application/json;charset=utf-8")
     suspend fun getUpcoming(
         @Header("Authorization") apiKey: String
     ): Response<MovieListModel>
 
     @GET("/3/trending/all/week")
-    @Headers("language:es-CO", "Content-Type:application/json", "charset=utf-8")
+    @Headers("language:es-CO", "Content-Type:application/json;charset=utf-8")
     suspend fun getTrending(
         @Header("Authorization") apiKey: String
     ): Response<MovieListModel>
