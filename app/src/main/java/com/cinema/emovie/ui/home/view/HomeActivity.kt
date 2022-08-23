@@ -11,6 +11,7 @@ import com.cinema.emovie.ui.home.status.HomeStatus
 import com.cinema.emovie.ui.home.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
@@ -70,6 +71,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setTrendingData(movies: List<Movie>?) = with(binding) {
         val verticalMovieAdapter = VerticalMovieAdapter({})
+
         recyclerViewTrending.apply {
             setHasFixedSize(false)
             isNestedScrollingEnabled = false

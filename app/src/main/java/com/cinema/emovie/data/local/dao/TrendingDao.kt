@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TrendingDao {
 
-    @Query("SELECT * FROM trending ORDER BY popularity DESC")
+    @Query("SELECT * FROM trending ORDER BY popularity DESC LIMIT 6")
     fun getAllTrending(): Flow<List<TrendingEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

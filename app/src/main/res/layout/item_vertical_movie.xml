@@ -2,11 +2,13 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view_poster"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/emovie_220dp"
+    android:layout_marginStart="@dimen/emovie_8dp"
+    android:layout_marginTop="@dimen/emovie_12dp"
+    android:layout_marginEnd="@dimen/emovie_8dp"
+    android:layout_marginBottom="@dimen/emovie_12dp"
     android:elevation="@dimen/emovie_8dp"
-    android:minWidth="@dimen/emovie_130dp"
-    android:minHeight="@dimen/emovie_180dp"
     app:cardCornerRadius="@dimen/emovie_18dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
