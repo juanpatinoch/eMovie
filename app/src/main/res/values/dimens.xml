@@ -12,6 +12,7 @@
     <dimen name="emovie_25dp">25dp</dimen>
     <dimen name="emovie_27dp">27dp</dimen>
     <dimen name="emovie_30dp">30dp</dimen>
+    <dimen name="emovie_32dp">32dp</dimen>
     <dimen name="emovie_130dp">130dp</dimen>
     <dimen name="emovie_180dp">180dp</dimen>
     <dimen name="emovie_220dp">220dp</dimen>

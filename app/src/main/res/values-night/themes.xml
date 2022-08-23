@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.EMovie" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <!--   color for the app bar and other primary UI elements -->
         <item name="colorPrimary">@color/black</item>
         <!--   a darker variant of the primary color, used for

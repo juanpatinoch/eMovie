@@ -11,17 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/layout_appbar"
+            layout="@layout/layout_appbar"
+            android:layout_width="@dimen/emovie_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/emovie_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/text_view_upcoming_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/emovie_25dp"
-            android:layout_marginTop="@dimen/emovie_30dp"
+            android:layout_marginTop="@dimen/emovie_20dp"
             android:fontFamily="@font/poppins_semi_bold_600"
             android:text="@string/upcoming_title"
             android:textSize="@dimen/emovie_20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/layout_appbar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_upcoming"
