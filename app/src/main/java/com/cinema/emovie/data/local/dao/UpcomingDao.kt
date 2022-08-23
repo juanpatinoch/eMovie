@@ -1,9 +1,6 @@
 package com.cinema.emovie.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.cinema.emovie.data.local.entities.UpcomingEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -14,6 +11,15 @@ interface UpcomingDao {
     fun getAllUpcoming(): Flow<List<UpcomingEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllUpcoming(movies: List<UpcomingEntity>)
+    suspend fun insertUpcoming(movies: List<UpcomingEntity>)
+
+    @Query("DELETE FROM upcoming")
+    suspend fun deleteAllUpcoming()
+
+    @Transaction
+    suspend fun insertAllUpcoming(movies: List<UpcomingEntity>) {
+        deleteAllUpcoming()
+        insertUpcoming(movies)
+    }
 
 }

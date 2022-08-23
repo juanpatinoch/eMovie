@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cinema.emovie.common.network.ApiResponse
 import com.cinema.emovie.data.local.entities.toTopRatedEntity
+import com.cinema.emovie.data.local.entities.toTrendingEntity
 import com.cinema.emovie.data.local.entities.toUpcomingEntity
 import com.cinema.emovie.data.model.MovieListModel
 import com.cinema.emovie.data.model.MovieModel
@@ -14,6 +15,8 @@ import com.cinema.emovie.domain.top_rated.GetTopRatedAPI
 import com.cinema.emovie.domain.top_rated.GetTopRatedLocal
 import com.cinema.emovie.domain.top_rated.SetTopRatedLocal
 import com.cinema.emovie.domain.trending.GetTrendingAPI
+import com.cinema.emovie.domain.trending.GetTrendingLocal
+import com.cinema.emovie.domain.trending.SetTrendingLocal
 import com.cinema.emovie.domain.upcoming.GetUpcomingAPI
 import com.cinema.emovie.domain.upcoming.GetUpcomingLocal
 import com.cinema.emovie.domain.upcoming.SetUpcomingLocal
@@ -30,6 +33,8 @@ class HomeViewModel @Inject constructor(
     private val setUpcomingLocal: SetUpcomingLocal,
     private val getTopRatedLocal: GetTopRatedLocal,
     private val setTopRatedLocal: SetTopRatedLocal,
+    private val getTrendingLocal: GetTrendingLocal,
+    private val setTrendingLocal: SetTrendingLocal,
     private val getUpcomingAPI: GetUpcomingAPI,
     private val getTopRatedAPI: GetTopRatedAPI,
     private val getTrendingAPI: GetTrendingAPI
@@ -109,7 +114,14 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getTrendingData(mediaType: String, timeWindow: String) {
+        getTrendingDataLocal()
         getTrendingDataAPI(mediaType, timeWindow)
+    }
+
+    private fun getTrendingDataLocal() = viewModelScope.launch(Dispatchers.Main) {
+        getTrendingLocal.invoke().collect {
+            setUIStatus(HomeStatus.SuccessGetTopRated(it.toDomain()))
+        }
     }
 
     private fun getTrendingDataAPI(mediaType: String, timeWindow: String) =
@@ -120,10 +132,17 @@ class HomeViewModel @Inject constructor(
     private suspend fun validateGetTrendingDataAPIResponse(response: ApiResponse<MovieListModel>) {
         when (response) {
             is ApiResponse.Success -> {
+                setTrendingDataLocal(response.data.movieList)
             }
             is ApiResponse.Failure -> {
                 setUIStatus(HomeStatus.Error(response.exception))
             }
+        }
+    }
+
+    private suspend fun setTrendingDataLocal(movies: List<MovieModel>?) {
+        movies?.toTrendingEntity()?.let {
+            setTrendingLocal.invoke(it)
         }
     }
 

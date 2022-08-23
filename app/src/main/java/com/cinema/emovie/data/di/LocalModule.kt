@@ -33,4 +33,8 @@ object LocalModule {
     @Provides
     fun topRatedDaoProvider(db: MoviesDatabase) = db.getTopRatedDao()
 
+    @Singleton
+    @Provides
+    fun trendingDaoProvider(db: MoviesDatabase) = db.getTrendingDao()
+
 }

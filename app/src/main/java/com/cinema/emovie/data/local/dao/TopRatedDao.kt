@@ -1,9 +1,6 @@
 package com.cinema.emovie.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.cinema.emovie.data.local.entities.TopRatedEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -14,6 +11,15 @@ interface TopRatedDao {
     fun getAllTopRated(): Flow<List<TopRatedEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllTopRated(movies: List<TopRatedEntity>)
+    suspend fun insertTopRated(movies: List<TopRatedEntity>)
+
+    @Query("DELETE FROM top_rated")
+    suspend fun deleteAllTopRated()
+
+    @Transaction
+    suspend fun insertAllTopRated(movies: List<TopRatedEntity>) {
+        deleteAllTopRated()
+        insertTopRated(movies)
+    }
 
 }
