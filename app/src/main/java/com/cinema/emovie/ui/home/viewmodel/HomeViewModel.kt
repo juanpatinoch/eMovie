@@ -13,6 +13,7 @@ import com.cinema.emovie.domain.model.toDomain
 import com.cinema.emovie.domain.top_rated.GetTopRatedAPI
 import com.cinema.emovie.domain.top_rated.GetTopRatedLocal
 import com.cinema.emovie.domain.top_rated.SetTopRatedLocal
+import com.cinema.emovie.domain.trending.GetTrendingAPI
 import com.cinema.emovie.domain.upcoming.GetUpcomingAPI
 import com.cinema.emovie.domain.upcoming.GetUpcomingLocal
 import com.cinema.emovie.domain.upcoming.SetUpcomingLocal
@@ -30,15 +31,17 @@ class HomeViewModel @Inject constructor(
     private val getTopRatedLocal: GetTopRatedLocal,
     private val setTopRatedLocal: SetTopRatedLocal,
     private val getUpcomingAPI: GetUpcomingAPI,
-    private val getTopRatedAPI: GetTopRatedAPI
+    private val getTopRatedAPI: GetTopRatedAPI,
+    private val getTrendingAPI: GetTrendingAPI
 ) : ViewModel() {
 
     private val _homeStatus = MutableLiveData<HomeStatus>()
     val homeStatus: LiveData<HomeStatus> = _homeStatus
 
-    fun getInitData() {
+    fun getInitData(mediaType: String, timeWindow: String) {
         getUpcomingData()
         getTopRatedData()
+        getTrendingData(mediaType, timeWindow)
     }
 
     private fun getUpcomingData() {
@@ -102,6 +105,25 @@ class HomeViewModel @Inject constructor(
     private suspend fun setTopRatedDataLocal(movies: List<MovieModel>?) {
         movies?.toTopRatedEntity()?.let {
             setTopRatedLocal.invoke(it)
+        }
+    }
+
+    fun getTrendingData(mediaType: String, timeWindow: String) {
+        getTrendingDataAPI(mediaType, timeWindow)
+    }
+
+    private fun getTrendingDataAPI(mediaType: String, timeWindow: String) =
+        viewModelScope.launch(Dispatchers.IO) {
+            validateGetTrendingDataAPIResponse(getTrendingAPI.invoke(mediaType, timeWindow))
+        }
+
+    private suspend fun validateGetTrendingDataAPIResponse(response: ApiResponse<MovieListModel>) {
+        when (response) {
+            is ApiResponse.Success -> {
+            }
+            is ApiResponse.Failure -> {
+                setUIStatus(HomeStatus.Error(response.exception))
+            }
         }
     }
 

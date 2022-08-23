@@ -14,8 +14,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-
     private val viewModel: HomeViewModel by viewModels()
+    private var mediaType: String? = null
+    private var timeWindow: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +43,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getInitData() {
-        viewModel.getInitData()
+        viewModel.getInitData("all", "week")
     }
 
     private fun setUpcomingData(movies: List<Movie>?) = with(binding) {
