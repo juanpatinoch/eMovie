@@ -8,7 +8,6 @@
     android:layout_marginTop="@dimen/emovie_12dp"
     android:layout_marginEnd="@dimen/emovie_8dp"
     android:layout_marginBottom="@dimen/emovie_12dp"
-    android:elevation="@dimen/emovie_8dp"
     app:cardCornerRadius="@dimen/emovie_18dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout

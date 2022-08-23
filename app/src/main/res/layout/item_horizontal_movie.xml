@@ -4,7 +4,6 @@
     android:id="@+id/card_view_poster"
     android:layout_width="@dimen/emovie_130dp"
     android:layout_height="@dimen/emovie_180dp"
-    android:elevation="@dimen/emovie_8dp"
     app:cardCornerRadius="@dimen/emovie_18dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
