@@ -12,17 +12,21 @@ class TopRatedDataSource @Inject constructor(
 ) {
 
     suspend fun getTopRated(): ApiResponse<MovieListModel> {
-        apiServices.getTopRated(
-            apiKeyModel.apiKey
-        ).run {
-            return when {
-                isSuccessful && body() != null -> {
-                    ApiResponse.Success(body() as MovieListModel)
-                }
-                else -> {
-                    ApiResponse.Failure(errorBody() as Exception)
+        try {
+            apiServices.getTopRated(
+                apiKeyModel.apiKey
+            ).run {
+                return when {
+                    isSuccessful && body() != null -> {
+                        ApiResponse.Success(body() as MovieListModel)
+                    }
+                    else -> {
+                        ApiResponse.Failure(errorBody() as Exception)
+                    }
                 }
             }
+        } catch (e: Exception) {
+            return ApiResponse.Failure(e)
         }
     }
 

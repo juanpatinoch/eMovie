@@ -74,8 +74,8 @@ dependencies {
     //Room Lib
     implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-    //Picasso Lib
-    implementation "com.squareup.picasso:picasso:$picasso_version"
+    //Glide Lib
+    implementation "com.github.bumptech.glide:glide:$glide_version"
 
     testImplementation 'junit:junit:4.+'
     testImplementation "io.mockk:mockk:1.12.2"

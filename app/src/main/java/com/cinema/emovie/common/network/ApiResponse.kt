@@ -10,13 +10,3 @@ sealed class ApiResponse<out M> {
         val exception: Exception
     ) : ApiResponse<M>()
 }
-
-/*data class ApiResponse<M>(
-    @SerializedName("page")
-    val page: Int?,
-    val model: M?,
-    @SerializedName("total_pages")
-    val totalPages: Int?,
-    @SerializedName("total_results")
-    val totalResults: Int?
-)*/

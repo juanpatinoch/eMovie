@@ -1,6 +1,7 @@
 package com.cinema.emovie.common.adapter
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +9,12 @@ import android.view.ViewGroup.MarginLayoutParams
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.cinema.emovie.common.loadUrl
-import com.cinema.emovie.common.toDP
+import com.cinema.emovie.common.*
 import com.cinema.emovie.databinding.ItemPosterBinding
 import com.cinema.emovie.domain.model.Movie
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MovieAdapter(
@@ -38,12 +41,27 @@ class MovieAdapter(
 
             setCustomMargin(cardViewPoster, startMargin, endMargin)
 
-            item.posterUrl?.let {
-                imageViewPoster.loadUrl(it)
+            item.posterUrl?.let { url ->
+                val localStorageBitmap = url.getFromLocalStorage()
+                localStorageBitmap?.let {
+                    imageViewPoster.loadFromBitmap(context, it)
+                } ?: run {
+                    getBitmapImage(url)
+                }
             }
             cardViewPoster.setOnClickListener {
                 onItemClick.invoke(item)
             }
+        }
+
+        private fun getBitmapImage(url: String) = CoroutineScope(Dispatchers.IO).launch {
+            val bitmap = url.toBitmap(context)
+            setItemImage(bitmap)
+            bitmap.saveInLocalStorage(url)
+        }
+
+        private fun setItemImage(bitmap: Bitmap) = CoroutineScope(Dispatchers.Main).launch {
+            binding.imageViewPoster.loadFromBitmap(context, bitmap)
         }
 
         private fun setCustomMargin(
