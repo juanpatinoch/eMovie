@@ -17,20 +17,50 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
     private val viewModel: HomeViewModel by viewModels()
-    private var mediaType: String? = null
-    private var timeWindow: String? = null
+    private var mediaType = "all"
+    private var timeWindow = "day"
+    private var upcomingAdapter: HorizontalMovieAdapter? = null
+    private var topRatedAdapter: HorizontalMovieAdapter? = null
+    private var trendingAdapter: VerticalMovieAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setupBinding()
+        setupAdapters()
+        setupRecyclerViews()
         subscribeObserver()
         getInitData()
+        setListener()
     }
 
     private fun setupBinding() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+
+    private fun setupAdapters() {
+        upcomingAdapter = HorizontalMovieAdapter { }
+        topRatedAdapter = HorizontalMovieAdapter { }
+        trendingAdapter = VerticalMovieAdapter { }
+    }
+
+    private fun setupRecyclerViews() = with(binding) {
+        recyclerViewUpcoming.apply {
+            setHasFixedSize(false)
+            isNestedScrollingEnabled = false;
+            adapter = upcomingAdapter
+        }
+        recyclerViewTopRated.apply {
+            setHasFixedSize(false)
+            isNestedScrollingEnabled = false;
+            adapter = topRatedAdapter
+        }
+        recyclerViewTrending.apply {
+            setHasFixedSize(false)
+            isNestedScrollingEnabled = false;
+            adapter = trendingAdapter
+        }
     }
 
     private fun subscribeObserver() {
@@ -47,37 +77,61 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getInitData() {
-        viewModel.getInitData("all", "week")
+        viewModel.getInitData(mediaType, timeWindow)
     }
 
-    private fun setUpcomingData(movies: List<Movie>?) = with(binding) {
-        val horizontalMovieAdapter = HorizontalMovieAdapter({})
-        recyclerViewUpcoming.apply {
-            setHasFixedSize(false)
-            isNestedScrollingEnabled = false;
-            adapter = horizontalMovieAdapter
-        }
-        horizontalMovieAdapter.submitList(movies)
+    private fun getTrendingData() {
+        viewModel.getTrendingData(mediaType, timeWindow)
     }
 
-    private fun setTopRatedData(movies: List<Movie>?) = with(binding) {
-        val horizontalMovieAdapter = HorizontalMovieAdapter({})
-        recyclerViewTopRated.apply {
-            setHasFixedSize(false)
-            isNestedScrollingEnabled = false;
-            adapter = horizontalMovieAdapter
+    private fun setListener() = with(binding) {
+        radioGroupMediaType.setOnCheckedChangeListener { _, id ->
+            onMediaTypeChange(id)
         }
-        horizontalMovieAdapter.submitList(movies)
+        radioGroupTimeWindow.setOnCheckedChangeListener { _, id ->
+            onTimeWindowChange(id)
+        }
     }
 
-    private fun setTrendingData(movies: List<Movie>?) = with(binding) {
-        val verticalMovieAdapter = VerticalMovieAdapter({})
-
-        recyclerViewTrending.apply {
-            setHasFixedSize(false)
-            isNestedScrollingEnabled = false
-            adapter = verticalMovieAdapter
+    private fun onMediaTypeChange(id: Int) = with(binding) {
+        when (id) {
+            radioButtonMediaTypeAll.id -> {
+                mediaType = "all"
+                getTrendingData()
+            }
+            radioButtonMediaTypeMovie.id -> {
+                mediaType = "movie"
+                getTrendingData()
+            }
+            radioButtonMediaTypeTvShows.id -> {
+                mediaType = "tv"
+                getTrendingData()
+            }
         }
-        verticalMovieAdapter.submitList(movies)
+    }
+
+    private fun onTimeWindowChange(id: Int) = with(binding) {
+        when (id) {
+            radioButtonTimeWindowDay.id -> {
+                timeWindow = "day"
+                getTrendingData()
+            }
+            radioButtonTimeWindowWeek.id -> {
+                timeWindow = "week"
+                getTrendingData()
+            }
+        }
+    }
+
+    private fun setUpcomingData(movies: List<Movie>?) {
+        upcomingAdapter?.submitList(movies)
+    }
+
+    private fun setTopRatedData(movies: List<Movie>?) {
+        topRatedAdapter?.submitList(movies)
+    }
+
+    private fun setTrendingData(movies: List<Movie>?) {
+        trendingAdapter?.submitList(movies)
     }
 }
