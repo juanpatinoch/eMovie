@@ -1,26 +1,25 @@
-package com.cinema.emovie.common.adapter
+package com.cinema.emovie.ui.home.adapter
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.MarginLayoutParams
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cinema.emovie.common.*
-import com.cinema.emovie.databinding.ItemPosterBinding
+import com.cinema.emovie.databinding.ItemHorizontalMovieBinding
 import com.cinema.emovie.domain.model.Movie
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
-class MovieAdapter(
+class HorizontalMovieAdapter(
     private val onItemClick: (movieItem: Movie) -> Unit
-) : ListAdapter<Movie, MovieAdapter.MovieAdapterViewHolder>(ItemAdapterDiffCallback()) {
-
+) : ListAdapter<Movie, HorizontalMovieAdapter.HorizontalMovieAdapterViewHolder>(
+    ItemAdapterDiffCallback()
+) {
     private lateinit var context: Context
 
     class ItemAdapterDiffCallback : DiffUtil.ItemCallback<Movie>() {
@@ -29,8 +28,8 @@ class MovieAdapter(
         override fun areContentsTheSame(oldItem: Movie, newItem: Movie) = oldItem.id == newItem.id
     }
 
-    inner class MovieAdapterViewHolder(
-        private val binding: ItemPosterBinding
+    inner class HorizontalMovieAdapterViewHolder(
+        private val binding: ItemHorizontalMovieBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int) = with(binding) {
@@ -76,23 +75,25 @@ class MovieAdapter(
             val topMarginDP = topMargin.toDP(context)
             val bottomMarginDP = bottomMargin.toDP(context)
 
-            if (view.layoutParams is MarginLayoutParams) {
-                val p = view.layoutParams as MarginLayoutParams
+            if (view.layoutParams is ViewGroup.MarginLayoutParams) {
+                val p = view.layoutParams as ViewGroup.MarginLayoutParams
                 p.setMargins(startMarginDP, topMarginDP, endMarginDP, bottomMarginDP)
                 view.requestLayout()
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapterViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): HorizontalMovieAdapterViewHolder {
         context = parent.context
         val inflater = LayoutInflater.from(context)
-        val view = ItemPosterBinding.inflate(inflater, parent, false)
-        return MovieAdapterViewHolder(view)
+        val view = ItemHorizontalMovieBinding.inflate(inflater, parent, false)
+        return HorizontalMovieAdapterViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MovieAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HorizontalMovieAdapterViewHolder, position: Int) {
         holder.bind(position)
     }
-
 }

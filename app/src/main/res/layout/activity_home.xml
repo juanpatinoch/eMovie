@@ -1,55 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.home.view.HomeActivity">
 
-    <TextView
-        android:id="@+id/text_view_upcoming_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/emovie_25dp"
-        android:layout_marginTop="@dimen/emovie_30dp"
-        android:text="@string/upcoming_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_upcoming"
-        android:layout_width="@dimen/emovie_0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/emovie_12dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_upcoming_title"
-        tools:ignore="RtlSymmetry,SpeakableTextPresentCheck"
-        tools:listitem="@layout/item_poster" />
+        <TextView
+            android:id="@+id/text_view_upcoming_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/emovie_25dp"
+            android:layout_marginTop="@dimen/emovie_30dp"
+            android:text="@string/upcoming_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_view_top_rated_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/emovie_25dp"
-        android:layout_marginTop="@dimen/emovie_27dp"
-        android:text="@string/upcoming_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view_upcoming" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_upcoming"
+            android:layout_width="@dimen/emovie_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/emovie_12dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_upcoming_title"
+            tools:ignore="RtlSymmetry,SpeakableTextPresentCheck"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_horizontal_movie" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_top_rated"
-        android:layout_width="@dimen/emovie_0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/emovie_12dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_top_rated_title"
-        tools:ignore="RtlSymmetry,SpeakableTextPresentCheck"
-        tools:listitem="@layout/item_poster" />
+        <TextView
+            android:id="@+id/text_view_top_rated_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/emovie_25dp"
+            android:layout_marginTop="@dimen/emovie_27dp"
+            android:text="@string/top_rated_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_upcoming" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_top_rated"
+            android:layout_width="@dimen/emovie_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/emovie_12dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_top_rated_title"
+            tools:ignore="RtlSymmetry,SpeakableTextPresentCheck"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_horizontal_movie" />
+
+        <TextView
+            android:id="@+id/text_view_trending_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/emovie_25dp"
+            android:layout_marginTop="@dimen/emovie_27dp"
+            android:text="@string/trending_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_top_rated" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_trending"
+            android:layout_width="@dimen/emovie_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/emovie_12dp"
+            android:layout_marginBottom="@dimen/emovie_12dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_trending_title"
+            app:spanCount="2"
+            tools:ignore="RtlSymmetry,SpeakableTextPresentCheck"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_vertical_movie" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

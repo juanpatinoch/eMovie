@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">eMovie</string>
     <string name="upcoming_title">Próximos estrenos</string>
+    <string name="top_rated_title">Tendencia</string>
+    <string name="trending_title">Recomendados para ti</string>
 </resources>

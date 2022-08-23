@@ -120,7 +120,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getTrendingDataLocal() = viewModelScope.launch(Dispatchers.Main) {
         getTrendingLocal.invoke().collect {
-            setUIStatus(HomeStatus.SuccessGetTopRated(it.toDomain()))
+            setUIStatus(HomeStatus.SuccessGetTrending(it.toDomain()))
         }
     }
 

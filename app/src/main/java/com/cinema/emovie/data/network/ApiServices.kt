@@ -21,7 +21,7 @@ interface ApiServices {
         @Header("Authorization") apiKey: String
     ): Response<MovieListModel>
 
-    @GET("/3/trending/{media_type}}/{time_window}")
+    @GET("/3/trending/{media_type}/{time_window}")
     @Headers("language:es-CO", "Content-Type:application/json;charset=utf-8")
     suspend fun getTrending(
         @Header("Authorization") apiKey: String,
