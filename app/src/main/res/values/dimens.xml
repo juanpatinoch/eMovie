@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="emovie_0dp">0dp</dimen>
+    <dimen name="emovie_1dp">1dp</dimen>
     <dimen name="emovie_8dp">8dp</dimen>
     <dimen name="emovie_12dp">12dp</dimen>
     <dimen name="emovie_16dp">16dp</dimen>
