@@ -5,7 +5,7 @@
     <string name="trending_title">Recomendados para ti</string>
     <string name="media_type_filter_all">Todos</string>
     <string name="media_type_filter_movies">Películas</string>
-    <string name="media_type_filter_tv_shows">Shows de TV</string>
+    <string name="media_type_filter_tv_shows">Series</string>
     <string name="time_window_filter_week">Esta semana</string>
     <string name="time_window_filter_day">Hoy</string>
 </resources>
