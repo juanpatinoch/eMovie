@@ -1,6 +1,7 @@
 package com.cinema.emovie.ui.movie_detail.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.cinema.emovie.common.getFromLocalStorage
 import com.cinema.emovie.common.loadFromBitmap
@@ -16,6 +17,7 @@ class MovieDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setupBinding()
+        setupAppBar()
         getInfoArguments()
         showMovieData()
     }
@@ -23,6 +25,11 @@ class MovieDetailActivity : AppCompatActivity() {
     private fun setupBinding() {
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+
+    private fun setupAppBar() = with(binding) {
+        layoutAppbar.imageViewAppbarLogo.visibility = View.GONE
+        layoutAppbar.imageViewAppbarBack.visibility = View.VISIBLE
     }
 
     private fun getInfoArguments() {
