@@ -11,18 +11,18 @@ data class TrendingEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Int = 0,
-    @ColumnInfo(name = "adult")
-    val adult: Boolean?,
-    @ColumnInfo(name = "backdrop_url")
-    val backdropUrl: String?,
     @ColumnInfo(name = "title")
     val title: String?,
+    @ColumnInfo(name = "original_title")
+    val originalTitle: String?,
+    @ColumnInfo(name = "original_name")
+    val originalName: String?,
+    @ColumnInfo(name = "original_language")
+    val originalLanguage: String?,
     @ColumnInfo(name = "overview")
     val overview: String?,
     @ColumnInfo(name = "poster_url")
     val posterUrl: String?,
-    @ColumnInfo(name = "media_type")
-    val mediaType: String?,
     @ColumnInfo(name = "genre_ids")
     val genreIds: ArrayList<String>?,
     @ColumnInfo(name = "popularity")
@@ -32,25 +32,22 @@ data class TrendingEntity(
     @ColumnInfo(name = "video")
     val video: Boolean?,
     @ColumnInfo(name = "vote_average")
-    val voteAverage: Double?,
-    @ColumnInfo(name = "vote_count")
-    val voteCount: Int?
+    val voteAverage: Double?
 )
 
 fun List<MovieModel>?.toTrendingEntity() = this?.map {
     TrendingEntity(
         it.id ?: 0,
-        it.adult,
-        "$POSTER_IMAGE_URL${it.backdropPath}",
         it.title,
+        it.originalTitle,
+        it.originalName,
+        it.originalLanguage,
         it.overview,
         "$POSTER_IMAGE_URL${it.posterPath}",
-        it.mediaType,
         it.genreIds?.map { num -> num.toString() } as ArrayList<String>,
         it.popularity,
         it.releaseDate,
         it.video,
-        it.voteAverage,
-        it.voteCount
+        it.voteAverage
     )
 }

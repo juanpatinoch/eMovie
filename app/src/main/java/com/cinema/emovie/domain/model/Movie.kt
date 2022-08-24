@@ -6,74 +6,70 @@ import com.cinema.emovie.data.local.entities.UpcomingEntity
 import java.io.Serializable
 
 data class Movie(
-    val adult: Boolean?,
-    val backdropUrl: String?,
     val id: Int?,
     val title: String?,
+    val originalTitle: String?,
+    val originalName: String?,
+    val originalLanguage: String?,
     val overview: String?,
     val posterUrl: String?,
-    val mediaType: String?,
     val genreIds: List<Int>?,
     val popularity: Double?,
     val releaseDate: String?,
     val video: Boolean?,
-    val voteAverage: Double?,
-    val voteCount: Int?
+    val voteAverage: Double?
 ) : Serializable
 
 @JvmName("upcomingToDomain")
 fun List<UpcomingEntity>.toDomain() = this.map {
     Movie(
-        it.adult,
-        it.backdropUrl,
         it.id,
         it.title,
+        it.originalTitle,
+        it.originalName,
+        it.originalLanguage,
         it.overview,
         it.posterUrl,
-        it.mediaType,
-        it.genreIds?.map { num -> num.toInt() } as ArrayList<Int>,
+        it.genreIds?.map { num -> num.toInt() } as List<Int>,
         it.popularity,
         it.releaseDate,
         it.video,
-        it.voteAverage,
-        it.voteCount
+        it.voteAverage
     )
 }
 
 @JvmName("topRatedToDomain")
 fun List<TopRatedEntity>.toDomain() = this.map {
     Movie(
-        it.adult,
-        it.backdropUrl,
         it.id,
         it.title,
+        it.originalTitle,
+        it.originalName,
+        it.originalLanguage,
         it.overview,
         it.posterUrl,
-        it.mediaType,
-        it.genreIds?.map { num -> num.toInt() } as ArrayList<Int>,
+        it.genreIds?.map { num -> num.toInt() } as List<Int>,
         it.popularity,
         it.releaseDate,
         it.video,
-        it.voteAverage,
-        it.voteCount
+        it.voteAverage
     )
 }
 
 @JvmName("trendingToDomain")
 fun List<TrendingEntity>.toDomain() = this.map {
     Movie(
-        it.adult,
-        it.backdropUrl,
         it.id,
         it.title,
+        it.originalTitle,
+        it.originalName,
+        it.originalLanguage,
         it.overview,
         it.posterUrl,
-        it.mediaType,
-        it.genreIds?.map { num -> num.toInt() } as ArrayList<Int>,
+        it.genreIds?.map { num -> num.toInt() } as List<Int>,
         it.popularity,
         it.releaseDate,
         it.video,
-        it.voteAverage,
-        it.voteCount
+        it.voteAverage
     )
 }
