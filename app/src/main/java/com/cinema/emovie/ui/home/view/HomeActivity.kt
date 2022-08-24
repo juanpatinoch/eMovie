@@ -1,5 +1,6 @@
 package com.cinema.emovie.ui.home.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import com.cinema.emovie.ui.home.adapter.HorizontalMovieAdapter
 import com.cinema.emovie.ui.home.adapter.VerticalMovieAdapter
 import com.cinema.emovie.ui.home.status.HomeStatus
 import com.cinema.emovie.ui.home.viewmodel.HomeViewModel
+import com.cinema.emovie.ui.movie_detail.view.MovieDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -40,9 +42,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupAdapters() {
-        upcomingAdapter = HorizontalMovieAdapter { }
-        topRatedAdapter = HorizontalMovieAdapter { }
-        trendingAdapter = VerticalMovieAdapter { }
+        upcomingAdapter = HorizontalMovieAdapter { navigateToMovieDetail(it) }
+        topRatedAdapter = HorizontalMovieAdapter { navigateToMovieDetail(it) }
+        trendingAdapter = VerticalMovieAdapter { navigateToMovieDetail(it) }
     }
 
     private fun setupRecyclerViews() = with(binding) {
@@ -134,4 +136,11 @@ class HomeActivity : AppCompatActivity() {
     private fun setTrendingData(movies: List<Movie>?) {
         trendingAdapter?.submitList(movies)
     }
+
+    private fun navigateToMovieDetail(movieItem: Movie) {
+        val intent = Intent(this, MovieDetailActivity::class.java)
+        intent.putExtra("movieItem", movieItem)
+        startActivity(intent)
+    }
+
 }

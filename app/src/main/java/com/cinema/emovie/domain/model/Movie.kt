@@ -3,6 +3,7 @@ package com.cinema.emovie.domain.model
 import com.cinema.emovie.data.local.entities.TopRatedEntity
 import com.cinema.emovie.data.local.entities.TrendingEntity
 import com.cinema.emovie.data.local.entities.UpcomingEntity
+import java.io.Serializable
 
 data class Movie(
     val adult: Boolean?,
@@ -18,7 +19,7 @@ data class Movie(
     val video: Boolean?,
     val voteAverage: Double?,
     val voteCount: Int?
-)
+) : Serializable
 
 @JvmName("upcomingToDomain")
 fun List<UpcomingEntity>.toDomain() = this.map {
