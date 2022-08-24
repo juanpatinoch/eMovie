@@ -3,7 +3,9 @@ package com.cinema.emovie.common
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.TypedValue
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.cinema.emovie.common.cache.LruCacheHandler
 
@@ -30,4 +32,11 @@ fun ImageView.loadFromBitmap(context: Context, bitmap: Bitmap) {
         .load(bitmap)
         .centerCrop()
         .into(this)
+}
+
+fun TextView.showText(text: String?) {
+    text?.let {
+        this.visibility = View.VISIBLE
+        this.text = it
+    }
 }

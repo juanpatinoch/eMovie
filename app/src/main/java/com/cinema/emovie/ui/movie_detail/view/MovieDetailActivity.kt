@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.cinema.emovie.common.getFromLocalStorage
 import com.cinema.emovie.common.loadFromBitmap
+import com.cinema.emovie.common.showText
 import com.cinema.emovie.databinding.ActivityMovieDetailBinding
 import com.cinema.emovie.domain.model.Movie
 
@@ -36,9 +37,10 @@ class MovieDetailActivity : AppCompatActivity() {
         movieItem = intent.getSerializableExtra("movieItem") as Movie
     }
 
-    private fun showMovieData() {
+    private fun showMovieData() = with(binding) {
         movieItem?.let {
             getPosterImage(it.posterUrl)
+            textViewMovieDetailTitle.showText(it.title)
         }
     }
 
