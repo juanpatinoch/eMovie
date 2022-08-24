@@ -143,6 +143,20 @@
                         tools:text="Heartfelt · Romance · Sci-fi · Drama"
                         tools:visibility="visible" />
 
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/button_movie_detail_trailer"
+                        style="@style/TransparentButton"
+                        android:layout_width="@dimen/emovie_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/emovie_24dp"
+                        android:layout_marginTop="@dimen/emovie_16dp"
+                        android:layout_marginEnd="@dimen/emovie_24dp"
+                        android:gravity="center"
+                        android:text="@string/trailer_button"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_movie_detail_genres" />
+
                     <TextView
                         android:id="@+id/text_view_movie_detail_overview"
                         android:layout_width="@dimen/emovie_0dp"
@@ -156,7 +170,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_view_movie_detail_genres"
+                        app:layout_constraintTop_toBottomOf="@+id/button_movie_detail_trailer"
                         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
                         tools:visibility="visible" />
 
