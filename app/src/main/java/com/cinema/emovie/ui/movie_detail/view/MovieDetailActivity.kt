@@ -1,5 +1,6 @@
 package com.cinema.emovie.ui.movie_detail.view
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,8 @@ class MovieDetailActivity : AppCompatActivity() {
 
         setupBinding()
         setupAppBar()
+        setupSizes()
+        setListeners()
         getInfoArguments()
         showMovieData()
     }
@@ -31,6 +34,20 @@ class MovieDetailActivity : AppCompatActivity() {
         layoutAppbar.imageViewAppbarBack.visibility = View.VISIBLE
     }
 
+    private fun setupSizes() {
+        val metrics = Resources.getSystem().displayMetrics
+        val height = metrics.widthPixels.coerceAtMost(metrics.heightPixels)
+        val params = binding.transparentView.layoutParams
+        params.height = (height * 70) / 70
+        binding.transparentView.layoutParams = params
+    }
+
+    private fun setListeners() {
+        binding.layoutAppbar.imageViewAppbarBack.setOnClickListener {
+            finish()
+        }
+    }
+
     private fun getInfoArguments() {
         movieItem = intent.getSerializableExtra("movieItem") as Movie
     }
@@ -41,6 +58,8 @@ class MovieDetailActivity : AppCompatActivity() {
         showYear()
         showLanguage()
         showVoteAverage()
+        showGenres()
+        showOverview()
     }
 
     private fun getPosterImage() {
@@ -67,6 +86,14 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun showVoteAverage() {
         binding.textViewMovieDetailVoteAverage.showText(movieItem?.voteAverage?.toOneDecimal())
+    }
+
+    private fun showGenres() {
+        binding.textViewMovieDetailGenres.showText("Heartfelt · Romance · Sci-fi · Drama")
+    }
+
+    private fun showOverview() {
+        binding.textViewMovieDetailOverview.showText(movieItem?.overview)
     }
 
 }
