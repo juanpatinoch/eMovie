@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TopRatedDao {
 
-    @Query("SELECT * FROM top_rated ORDER BY popularity DESC")
+    @Query("SELECT * FROM top_rated ORDER BY vote_average DESC, popularity DESC")
     fun getAllTopRated(): Flow<List<TopRatedEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

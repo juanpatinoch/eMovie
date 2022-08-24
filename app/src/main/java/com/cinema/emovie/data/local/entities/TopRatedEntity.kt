@@ -29,6 +29,8 @@ data class TopRatedEntity(
     val popularity: Double?,
     @ColumnInfo(name = "release_date")
     val releaseDate: String?,
+    @ColumnInfo(name = "first_air_date")
+    val firstAirDate: String?,
     @ColumnInfo(name = "video")
     val video: Boolean?,
     @ColumnInfo(name = "vote_average")
@@ -47,6 +49,7 @@ fun List<MovieModel>?.toTopRatedEntity() = this?.map {
         it.genreIds?.map { num -> num.toString() } as ArrayList<String>,
         it.popularity,
         it.releaseDate,
+        it.firstAirDate,
         it.video,
         it.voteAverage
     )

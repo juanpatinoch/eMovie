@@ -17,7 +17,7 @@ import com.cinema.emovie.data.local.entities.UpcomingEntity
         UpcomingEntity::class,
         TopRatedEntity::class,
         TrendingEntity::class
-    ], version = 13
+    ], version = 14
 )
 @TypeConverters(Converters::class)
 abstract class MoviesDatabase : RoomDatabase() {

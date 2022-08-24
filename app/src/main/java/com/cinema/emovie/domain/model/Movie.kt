@@ -16,6 +16,7 @@ data class Movie(
     val genreIds: List<Int>?,
     val popularity: Double?,
     val releaseDate: String?,
+    val firstAirDate: String?,
     val video: Boolean?,
     val voteAverage: Double?
 ) : Serializable
@@ -33,6 +34,7 @@ fun List<UpcomingEntity>.toDomain() = this.map {
         it.genreIds?.map { num -> num.toInt() } as List<Int>,
         it.popularity,
         it.releaseDate,
+        it.firstAirDate,
         it.video,
         it.voteAverage
     )
@@ -51,6 +53,7 @@ fun List<TopRatedEntity>.toDomain() = this.map {
         it.genreIds?.map { num -> num.toInt() } as List<Int>,
         it.popularity,
         it.releaseDate,
+        it.firstAirDate,
         it.video,
         it.voteAverage
     )
@@ -69,6 +72,7 @@ fun List<TrendingEntity>.toDomain() = this.map {
         it.genreIds?.map { num -> num.toInt() } as List<Int>,
         it.popularity,
         it.releaseDate,
+        it.firstAirDate,
         it.video,
         it.voteAverage
     )

@@ -1,5 +1,6 @@
 package com.cinema.emovie.common
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.util.TypedValue
@@ -8,6 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.cinema.emovie.common.cache.LruCacheHandler
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 fun Int.toDP(context: Context) = TypedValue.applyDimension(
@@ -40,3 +43,18 @@ fun TextView.showText(text: String?) {
         this.text = it
     }
 }
+
+@SuppressLint("SimpleDateFormat")
+fun String.getYear(): String? {
+    val sdf = SimpleDateFormat("yyyy-MM-dd")
+    val date = sdf.parse(this)
+    val calendar = Calendar.getInstance()
+    date?.let {
+        calendar.time = it
+        return calendar.get(Calendar.YEAR).toString()
+    } ?: run {
+        return null
+    }
+}
+
+fun Double.toOneDecimal() = String.format("%.1f", this).replace(",", ".")

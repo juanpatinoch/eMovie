@@ -23,6 +23,8 @@ data class MovieModel(
     val popularity: Double?,
     @SerializedName("release_date")
     val releaseDate: String?,
+    @SerializedName("first_air_date")
+    val firstAirDate: String?,
     @SerializedName("video")
     val video: Boolean?,
     @SerializedName("vote_average")

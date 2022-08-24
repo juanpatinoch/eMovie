@@ -3,9 +3,7 @@ package com.cinema.emovie.ui.movie_detail.view
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.cinema.emovie.common.getFromLocalStorage
-import com.cinema.emovie.common.loadFromBitmap
-import com.cinema.emovie.common.showText
+import com.cinema.emovie.common.*
 import com.cinema.emovie.databinding.ActivityMovieDetailBinding
 import com.cinema.emovie.domain.model.Movie
 
@@ -38,17 +36,37 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun showMovieData() = with(binding) {
-        movieItem?.let {
-            getPosterImage(it.posterUrl)
-            textViewMovieDetailTitle.showText(it.title)
-        }
+        getPosterImage()
+        showTitle()
+        showYear()
+        showLanguage()
+        showVoteAverage()
     }
 
-    private fun getPosterImage(url: String?) {
-        val localStorageBitmap = url?.getFromLocalStorage()
+    private fun getPosterImage() {
+        val localStorageBitmap = movieItem?.posterUrl?.getFromLocalStorage()
         localStorageBitmap?.let {
             binding.imageViewMovieDetailPoster.loadFromBitmap(this, it)
         }
+    }
+
+    private fun showTitle() = with(movieItem) {
+        binding.textViewMovieDetailTitle.showText(
+            this?.title ?: this?.originalTitle ?: this?.originalName
+        )
+    }
+
+    private fun showYear() = with(movieItem) {
+        val date = this?.releaseDate ?: this?.firstAirDate
+        binding.textViewMovieDetailYear.showText(date?.getYear())
+    }
+
+    private fun showLanguage() {
+        binding.textViewMovieDetailLanguage.showText(movieItem?.originalLanguage)
+    }
+
+    private fun showVoteAverage() {
+        binding.textViewMovieDetailVoteAverage.showText(movieItem?.voteAverage?.toOneDecimal())
     }
 
 }

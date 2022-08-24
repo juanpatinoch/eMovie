@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UpcomingDao {
 
-    @Query("SELECT * FROM upcoming ORDER BY popularity DESC")
+    @Query("SELECT * FROM upcoming ORDER BY vote_average DESC, popularity DESC")
     fun getAllUpcoming(): Flow<List<UpcomingEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
