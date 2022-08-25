@@ -12,7 +12,7 @@ class GenreRepository @Inject constructor(
 
     suspend fun getGenreDataSource() = genreDataSource.getGenre()
 
-    fun getGenreLocal() = genreDao.getAllGenres()
+    fun getGenreLocal(genreIdList: List<Int>?) = genreDao.getGenreString(genreIdList)
 
     suspend fun insertGenreLocal(genreEntityList: List<GenreEntity>) =
         genreDao.insertAllGenres(genreEntityList)

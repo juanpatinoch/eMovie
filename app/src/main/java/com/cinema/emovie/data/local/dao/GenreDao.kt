@@ -7,6 +7,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface GenreDao {
 
+    @Query("SELECT name FROM genre WHERE id IN (:genreIdList)")
+    fun getGenreString(genreIdList: List<Int>?): Flow<List<String>>
+
     @Query("SELECT * FROM genre ORDER BY name ASC")
     fun getAllGenres(): Flow<List<GenreEntity>>
 

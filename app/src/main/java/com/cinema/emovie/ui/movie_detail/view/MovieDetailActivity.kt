@@ -3,14 +3,22 @@ package com.cinema.emovie.ui.movie_detail.view
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.cinema.emovie.common.*
 import com.cinema.emovie.databinding.ActivityMovieDetailBinding
 import com.cinema.emovie.domain.model.Movie
+import com.cinema.emovie.ui.movie_detail.status.MovieDetailStatus
+import com.cinema.emovie.ui.movie_detail.viewmodel.MovieDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieDetailBinding
+
+    private val viewModel: MovieDetailViewModel by viewModels()
+
     private var movieItem: Movie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,9 +27,11 @@ class MovieDetailActivity : AppCompatActivity() {
         setupBinding()
         setupAppBar()
         setupSizes()
-        setListeners()
         getInfoArguments()
+        subscribeObserver()
+        getInitData()
         showMovieData()
+        setListeners()
     }
 
     private fun setupBinding() {
@@ -42,6 +52,21 @@ class MovieDetailActivity : AppCompatActivity() {
         binding.transparentView.layoutParams = params
     }
 
+    private fun subscribeObserver() {
+        viewModel.movieDetailStatus.observe(this) {
+            when (it) {
+                is MovieDetailStatus.SuccessGetGenre -> setGenreData(it.genres)
+                is MovieDetailStatus.Error -> {
+                    //TODO: Pendiente implementar esto
+                }
+            }
+        }
+    }
+
+    private fun getInitData() {
+        viewModel.getGenre(movieItem?.genreIds)
+    }
+
     private fun setListeners() {
         binding.layoutAppbar.imageViewAppbarBack.setOnClickListener {
             finish()
@@ -58,7 +83,6 @@ class MovieDetailActivity : AppCompatActivity() {
         showYear()
         showLanguage()
         showVoteAverage()
-        showGenres()
         showOverview()
     }
 
@@ -88,12 +112,12 @@ class MovieDetailActivity : AppCompatActivity() {
         binding.textViewMovieDetailVoteAverage.showText(movieItem?.voteAverage?.toOneDecimal())
     }
 
-    private fun showGenres() {
-        binding.textViewMovieDetailGenres.showText("Heartfelt · Romance · Sci-fi · Drama")
-    }
-
     private fun showOverview() {
         binding.textViewMovieDetailOverview.showText(movieItem?.overview)
+    }
+
+    private fun setGenreData(genres: String?) {
+        binding.textViewMovieDetailGenres.showText(genres)
     }
 
 }
