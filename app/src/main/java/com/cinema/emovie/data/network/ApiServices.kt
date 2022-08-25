@@ -1,5 +1,6 @@
 package com.cinema.emovie.data.network
 
+import com.cinema.emovie.data.model.GenreListModel
 import com.cinema.emovie.data.model.MovieListModel
 import retrofit2.Response
 import retrofit2.http.GET
@@ -28,5 +29,11 @@ interface ApiServices {
         @Path("media_type") mediaType: String,
         @Path("time_window") timeWindow: String
     ): Response<MovieListModel>
+
+    @GET("/3/genre/movie/list")
+    @Headers("language:es-CO", "Content-Type:application/json;charset=utf-8")
+    suspend fun getGenre(
+        @Header("Authorization") apiKey: String
+    ): Response<GenreListModel>
 
 }
