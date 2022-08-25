@@ -12,6 +12,8 @@ class TrailerRepository @Inject constructor(
 
     suspend fun getTrailerDataSource(movieId: Int) = trailerDataSource.getTrailer(movieId)
 
+    suspend fun getTrailerTvDataSource(movieId: Int) = trailerDataSource.getTrailerTv(movieId)
+
     fun getTrailerLocal(movieId: Int?) = trailerDao.getTrailer(movieId)
 
     suspend fun insertTrailerLocal(trailerEntityList: List<TrailerEntity>) =

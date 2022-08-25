@@ -1,5 +1,6 @@
 package com.cinema.emovie.domain.model
 
+import com.cinema.emovie.common.MEDIA_TYPE_DEFAULT
 import com.cinema.emovie.data.local.entities.TopRatedEntity
 import com.cinema.emovie.data.local.entities.TrendingEntity
 import com.cinema.emovie.data.local.entities.UpcomingEntity
@@ -18,7 +19,8 @@ data class Movie(
     val releaseDate: String?,
     val firstAirDate: String?,
     val video: Boolean?,
-    val voteAverage: Double?
+    val voteAverage: Double?,
+    val mediaType: String?
 ) : Serializable
 
 @JvmName("upcomingToDomain")
@@ -36,7 +38,8 @@ fun List<UpcomingEntity>.toDomain() = this.map {
         it.releaseDate,
         it.firstAirDate,
         it.video,
-        it.voteAverage
+        it.voteAverage,
+        MEDIA_TYPE_DEFAULT
     )
 }
 
@@ -55,7 +58,8 @@ fun List<TopRatedEntity>.toDomain() = this.map {
         it.releaseDate,
         it.firstAirDate,
         it.video,
-        it.voteAverage
+        it.voteAverage,
+        MEDIA_TYPE_DEFAULT
     )
 }
 
@@ -74,6 +78,7 @@ fun List<TrendingEntity>.toDomain() = this.map {
         it.releaseDate,
         it.firstAirDate,
         it.video,
-        it.voteAverage
+        it.voteAverage,
+        it.mediaType
     )
 }

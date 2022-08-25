@@ -44,4 +44,11 @@ interface ApiServices {
         @Path("movie_id") movieId: Int
     ): Response<TrailerListModel>
 
+    @GET("/3/tv/{movie_id}/videos")
+    @Headers("language:es-CO", "Content-Type:application/json;charset=utf-8")
+    suspend fun getTrailerTv(
+        @Header("Authorization") apiKey: String,
+        @Path("movie_id") movieId: Int
+    ): Response<TrailerListModel>
+
 }

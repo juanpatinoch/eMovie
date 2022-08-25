@@ -34,7 +34,9 @@ data class TrendingEntity(
     @ColumnInfo(name = "video")
     val video: Boolean?,
     @ColumnInfo(name = "vote_average")
-    val voteAverage: Double?
+    val voteAverage: Double?,
+    @ColumnInfo(name = "media_type")
+    val mediaType: String?
 )
 
 fun List<MovieModel>?.toTrendingEntity() = this?.map {
@@ -51,6 +53,7 @@ fun List<MovieModel>?.toTrendingEntity() = this?.map {
         it.releaseDate,
         it.firstAirDate,
         it.video,
-        it.voteAverage
+        it.voteAverage,
+        it.mediaType
     )
 }

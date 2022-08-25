@@ -17,6 +17,7 @@ import com.cinema.emovie.domain.genre.SetGenreLocal
 import com.cinema.emovie.domain.model.toDomain
 import com.cinema.emovie.domain.trailer.GetTrailerAPI
 import com.cinema.emovie.domain.trailer.GetTrailerLocal
+import com.cinema.emovie.domain.trailer.GetTrailerTvAPI
 import com.cinema.emovie.domain.trailer.SetTrailerLocal
 import com.cinema.emovie.ui.movie_detail.status.MovieDetailStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,7 +33,8 @@ class MovieDetailViewModel @Inject constructor(
     private val getTrailerLocal: GetTrailerLocal,
     private val setTrailerLocal: SetTrailerLocal,
     private val getGenreAPI: GetGenreAPI,
-    private val getTrailerAPI: GetTrailerAPI
+    private val getTrailerAPI: GetTrailerAPI,
+    private val getTrailerTvAPI: GetTrailerTvAPI
 ) : ViewModel() {
 
     private val _movieDetailStatus = MutableLiveData<MovieDetailStatus>()
@@ -71,9 +73,9 @@ class MovieDetailViewModel @Inject constructor(
         }
     }
 
-    fun getTrailer(movieId: Int) {
+    fun getTrailer(movieId: Int, mediaType: String?) {
         getTrailerDataLocal(movieId)
-        getTrailerDataAPI(movieId)
+        getTrailerDataAPI(movieId, mediaType)
     }
 
     private fun getTrailerDataLocal(movieId: Int?) = viewModelScope.launch(Dispatchers.Main) {
@@ -82,9 +84,15 @@ class MovieDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getTrailerDataAPI(movieId: Int) = viewModelScope.launch(Dispatchers.IO) {
-        validateGetTrailerDataAPIResponse(getTrailerAPI.invoke(movieId), movieId)
-    }
+    private fun getTrailerDataAPI(movieId: Int, mediaType: String?) =
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = if (mediaType == "tv") {
+                getTrailerTvAPI.invoke(movieId)
+            } else {
+                getTrailerAPI.invoke(movieId)
+            }
+            validateGetTrailerDataAPIResponse(response, movieId)
+        }
 
     private suspend fun validateGetTrailerDataAPIResponse(
         response: ApiResponse<TrailerListModel>,

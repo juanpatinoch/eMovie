@@ -30,4 +30,24 @@ class TrailerDataSource @Inject constructor(
             return ApiResponse.Failure(e)
         }
     }
+
+    suspend fun getTrailerTv(movieId: Int): ApiResponse<TrailerListModel> {
+        try {
+            apiServices.getTrailerTv(
+                apiKeyModel.apiKey,
+                movieId
+            ).run {
+                return when {
+                    isSuccessful && body() != null -> {
+                        ApiResponse.Success(body() as TrailerListModel)
+                    }
+                    else -> {
+                        ApiResponse.Failure(errorBody() as Exception)
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            return ApiResponse.Failure(e)
+        }
+    }
 }

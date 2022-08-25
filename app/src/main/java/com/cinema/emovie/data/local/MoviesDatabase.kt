@@ -15,7 +15,7 @@ import com.cinema.emovie.data.local.entities.*
         TrendingEntity::class,
         GenreEntity::class,
         TrailerEntity::class
-    ], version = 18
+    ], version = 19
 )
 @TypeConverters(Converters::class)
 abstract class MoviesDatabase : RoomDatabase() {

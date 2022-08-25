@@ -28,5 +28,7 @@ data class MovieModel(
     @SerializedName("video")
     val video: Boolean?,
     @SerializedName("vote_average")
-    val voteAverage: Double?
+    val voteAverage: Double?,
+    @SerializedName("media_type")
+    val mediaType: String?
 )

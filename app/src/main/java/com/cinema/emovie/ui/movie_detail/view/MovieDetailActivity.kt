@@ -69,7 +69,7 @@ class MovieDetailActivity : AppCompatActivity() {
     private fun getInitData() {
         viewModel.getGenre(movieItem?.genreIds)
         movieItem?.id?.let {
-            viewModel.getTrailer(it)
+            viewModel.getTrailer(it, movieItem?.mediaType)
         }
     }
 
