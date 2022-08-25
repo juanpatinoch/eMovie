@@ -1,6 +1,8 @@
 package com.cinema.emovie.ui.movie_detail.view
 
+import android.content.Intent
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -8,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.cinema.emovie.common.*
 import com.cinema.emovie.databinding.ActivityMovieDetailBinding
 import com.cinema.emovie.domain.model.Movie
+import com.cinema.emovie.domain.model.Trailer
 import com.cinema.emovie.ui.movie_detail.status.MovieDetailStatus
 import com.cinema.emovie.ui.movie_detail.viewmodel.MovieDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,10 +19,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieDetailBinding
-
     private val viewModel: MovieDetailViewModel by viewModels()
-
     private var movieItem: Movie? = null
+    private var trailerItem: Trailer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +58,7 @@ class MovieDetailActivity : AppCompatActivity() {
         viewModel.movieDetailStatus.observe(this) {
             when (it) {
                 is MovieDetailStatus.SuccessGetGenre -> setGenreData(it.genres)
+                is MovieDetailStatus.SuccessGetTrailer -> setTrailerData(it.trailer)
                 is MovieDetailStatus.Error -> {
                     //TODO: Pendiente implementar esto
                 }
@@ -65,11 +68,17 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun getInitData() {
         viewModel.getGenre(movieItem?.genreIds)
+        movieItem?.id?.let {
+            viewModel.getTrailer(it)
+        }
     }
 
-    private fun setListeners() {
-        binding.layoutAppbar.imageViewAppbarBack.setOnClickListener {
+    private fun setListeners() = with(binding) {
+        layoutAppbar.imageViewAppbarBack.setOnClickListener {
             finish()
+        }
+        buttonMovieDetailTrailer.setOnClickListener {
+            openYoutubeTrailer(trailerItem?.key)
         }
     }
 
@@ -118,6 +127,21 @@ class MovieDetailActivity : AppCompatActivity() {
 
     private fun setGenreData(genres: String?) {
         binding.textViewMovieDetailGenres.showText(genres)
+    }
+
+    private fun setTrailerData(trailer: Trailer?) {
+        trailer?.let {
+            trailerItem = it
+            binding.buttonMovieDetailTrailer.visibility = View.VISIBLE
+        }
+    }
+
+    private fun openYoutubeTrailer(key: String?) {
+        key?.let {
+            val url = Uri.parse(String.format(YOUTUBE_URL, it))
+            val intent = Intent(Intent.ACTION_VIEW, url)
+            startActivity(intent)
+        }
     }
 
 }

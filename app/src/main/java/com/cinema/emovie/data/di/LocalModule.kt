@@ -41,4 +41,8 @@ object LocalModule {
     @Provides
     fun genreDaoProvider(db: MoviesDatabase) = db.getGenreDao()
 
+    @Singleton
+    @Provides
+    fun trailerDaoProvider(db: MoviesDatabase) = db.getTrailerDao()
+
 }

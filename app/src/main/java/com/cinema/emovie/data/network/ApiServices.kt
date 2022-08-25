@@ -2,6 +2,7 @@ package com.cinema.emovie.data.network
 
 import com.cinema.emovie.data.model.GenreListModel
 import com.cinema.emovie.data.model.MovieListModel
+import com.cinema.emovie.data.model.TrailerListModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -35,5 +36,12 @@ interface ApiServices {
     suspend fun getGenre(
         @Header("Authorization") apiKey: String
     ): Response<GenreListModel>
+
+    @GET("/3/movie/{movie_id}/videos")
+    @Headers("language:es-CO", "Content-Type:application/json;charset=utf-8")
+    suspend fun getTrailer(
+        @Header("Authorization") apiKey: String,
+        @Path("movie_id") movieId: Int
+    ): Response<TrailerListModel>
 
 }

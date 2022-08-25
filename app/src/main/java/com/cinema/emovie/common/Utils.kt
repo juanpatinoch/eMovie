@@ -58,3 +58,7 @@ fun String.getYear(): String? {
 }
 
 fun Double.toOneDecimal() = String.format("%.1f", this).replace(",", ".")
+
+fun String.openYoutubeVideo(){
+
+}
