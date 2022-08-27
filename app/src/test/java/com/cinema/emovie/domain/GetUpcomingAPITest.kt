@@ -9,6 +9,7 @@ import com.cinema.emovie.data.repository.upcoming.UpcomingRepository
 import com.cinema.emovie.domain.upcoming.GetUpcomingAPI
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.verify
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -50,6 +51,11 @@ class GetUpcomingAPITest {
             val actualData = getUpcomingAPI.invoke()
 
             //Then
+            verify {
+                runBlocking {
+                    upcomingRepository.getUpcomingDataSource()
+                }
+            }
             assertEquals(mockApiResponseSuccessMovieListModel, actualData)
         }
 
@@ -68,6 +74,11 @@ class GetUpcomingAPITest {
             val actualData = getUpcomingAPI.invoke()
 
             //Then
+            verify {
+                runBlocking {
+                    upcomingRepository.getUpcomingDataSource()
+                }
+            }
             assertEquals(mockFailure, actualData)
         }
 }
