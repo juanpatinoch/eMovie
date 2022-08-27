@@ -2,25 +2,39 @@ name: Build & Publish Release APK
 
 on:
   push:
+    branches:
+      - main
     tags:
-      - '*'
+      - 'v*'
 
 jobs:
   Gradle:
     runs-on: ubuntu-latest
+    
     steps:
     - name: checkout code
       uses: actions/checkout@v2
+      
     - name: setup jdk
       uses: actions/setup-java@v1
       with:
         java-version: 11
+        
     - name: Make Gradle executable
       run: chmod +x ./gradlew
+      
+    - name: Run Tests
+      run: bash ./gradlew test --stacktrace
+      
     - name: Build Release APK
       run: ./gradlew assembleRelease
-    - name: Releasing using Hub
-      uses: kyze8439690/action-release-releaseapk@master
+      
+    - name: Create release and upload apk
+      uses: underwindfall/create-release-with-debugapk@v2.0.0
       env:
        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-       APP_FOLDER: app
+      with:
+       tag_name: ${{ github.ref }}
+       asset_path: app/build/outputs/apk/release/app-release-unsigned.apk
+       asset_name: e_movie_release.apk
+       asset_content_type: application/zip
