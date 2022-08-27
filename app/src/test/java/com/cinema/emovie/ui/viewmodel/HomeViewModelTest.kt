@@ -1,4 +1,4 @@
-package com.cinema.emovie.ui.home.viewmodel
+package com.cinema.emovie.ui.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -17,6 +17,7 @@ import com.cinema.emovie.domain.upcoming.GetUpcomingAPI
 import com.cinema.emovie.domain.upcoming.GetUpcomingLocal
 import com.cinema.emovie.domain.upcoming.SetUpcomingLocal
 import com.cinema.emovie.ui.home.status.HomeStatus
+import com.cinema.emovie.ui.home.viewmodel.HomeViewModel
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
