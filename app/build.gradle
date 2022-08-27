@@ -65,7 +65,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     //Log interceptor
-    implementation "com.squareup.okhttp3:logging-interceptor:4.8.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:$interceptor_version"
     //Coroutines Lib
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     //Dagger Hilt Lib
