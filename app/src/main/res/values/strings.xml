@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">eMovie</string>
+    <string name="upcoming_title">Próximos estrenos</string>
+    <string name="top_rated_title">Tendencia</string>
+    <string name="trending_title">Recomendados para ti</string>
+    <string name="media_type_filter_all">Todos</string>
+    <string name="media_type_filter_movies">Películas</string>
+    <string name="media_type_filter_tv_shows">Series</string>
+    <string name="time_window_filter_week">Esta semana</string>
+    <string name="time_window_filter_day">Hoy</string>
+    <string name="trailer_button">Ver trailer</string>
+    <string name="io_exception_message">No hay conexión a Internet</string>
+    <string name="http_exception_message">Algo salió mal</string>
+    <string name="other_exception_message">Ha ocurrido un error desconocido</string>
+    <string name="retry_exception_message">Intentar de nuevo</string>
 </resources>

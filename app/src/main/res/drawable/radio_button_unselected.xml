@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="?android:attr/background" />
+    <stroke
+        android:width="@dimen/emovie_1dp"
+        android:color="?android:attr/textColor" />
+    <corners android:radius="@dimen/emovie_18dp" />
+    <padding
+        android:bottom="@dimen/emovie_8dp"
+        android:left="@dimen/emovie_16dp"
+        android:right="@dimen/emovie_16dp"
+        android:top="@dimen/emovie_8dp" />
+</shape>

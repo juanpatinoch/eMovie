@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.home.view.HomeActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/layout_appbar"
+            layout="@layout/layout_appbar"
+            android:layout_width="@dimen/emovie_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/emovie_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_upcoming_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/emovie_25dp"
+            android:layout_marginTop="@dimen/emovie_20dp"
+            android:fontFamily="@font/poppins_semi_bold_600"
+            android:text="@string/upcoming_title"
+            android:textSize="@dimen/emovie_20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_appbar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_upcoming"
+            android:layout_width="@dimen/emovie_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/emovie_12dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_upcoming_title"
+            tools:ignore="RtlSymmetry,SpeakableTextPresentCheck"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_horizontal_movie" />
+
+        <TextView
+            android:id="@+id/text_view_top_rated_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/emovie_25dp"
+            android:layout_marginTop="@dimen/emovie_27dp"
+            android:fontFamily="@font/poppins_semi_bold_600"
+            android:text="@string/top_rated_title"
+            android:textSize="@dimen/emovie_20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_upcoming" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_top_rated"
+            android:layout_width="@dimen/emovie_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/emovie_12dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_top_rated_title"
+            tools:ignore="RtlSymmetry,SpeakableTextPresentCheck"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_horizontal_movie" />
+
+        <TextView
+            android:id="@+id/text_view_trending_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/emovie_25dp"
+            android:layout_marginTop="@dimen/emovie_27dp"
+            android:fontFamily="@font/poppins_semi_bold_600"
+            android:text="@string/trending_title"
+            android:textSize="@dimen/emovie_20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_top_rated" />
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_view_media_type_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/emovie_8dp"
+            android:paddingBottom="@dimen/emovie_8dp"
+            android:scrollbars="none"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_trending_title">
+
+            <RadioGroup
+                android:id="@+id/radio_group_media_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_button_media_type_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/emovie_25dp"
+                    android:layout_marginEnd="@dimen/emovie_8dp"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/media_type_filter_all"
+                    android:textColor="@drawable/text_color_selector" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_media_type_movie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/emovie_8dp"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:text="@string/media_type_filter_movies"
+                    android:textColor="@drawable/text_color_selector" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_media_type_tv_shows"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/emovie_8dp"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:text="@string/media_type_filter_tv_shows"
+                    android:textColor="@drawable/text_color_selector" />
+
+            </RadioGroup>
+
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_view_time_window_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/emovie_8dp"
+            android:paddingBottom="@dimen/emovie_8dp"
+            android:scrollbars="none"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scroll_view_media_type_filter">
+
+            <RadioGroup
+                android:id="@+id/radio_group_time_window"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_button_time_window_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/emovie_25dp"
+                    android:layout_marginEnd="@dimen/emovie_8dp"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/time_window_filter_day"
+                    android:textColor="@drawable/text_color_selector" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_time_window_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/emovie_25dp"
+                    android:background="@drawable/radio_button_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:text="@string/time_window_filter_week"
+                    android:textColor="@drawable/text_color_selector" />
+
+            </RadioGroup>
+
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_trending"
+            android:layout_width="@dimen/emovie_0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/emovie_17dp"
+            android:paddingEnd="@dimen/emovie_17dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scroll_view_time_window_filter"
+            app:spanCount="2"
+            tools:ignore="RtlSymmetry,SpeakableTextPresentCheck"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_vertical_movie" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
