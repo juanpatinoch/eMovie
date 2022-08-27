@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.cinema.emovie.common.getFromLocalStorage
-import com.cinema.emovie.common.loadFromBitmap
-import com.cinema.emovie.common.saveInLocalStorage
-import com.cinema.emovie.common.toBitmap
+import com.cinema.emovie.common.*
 import com.cinema.emovie.databinding.ItemVerticalMovieBinding
 import com.cinema.emovie.domain.model.Movie
 import kotlinx.coroutines.CoroutineScope
@@ -38,6 +35,8 @@ class VerticalMovieAdapter(
         fun bind(position: Int) = with(binding) {
             val item = getItem(position)
 
+            imageViewPoster.clear(context)
+
             item.posterUrl?.let { url ->
                 val localStorageBitmap = url.getFromLocalStorage()
                 localStorageBitmap?.let {
@@ -54,8 +53,10 @@ class VerticalMovieAdapter(
 
         private fun getBitmapImage(url: String) = CoroutineScope(Dispatchers.IO).launch {
             val bitmap = url.toBitmap(context)
-            setItemImage(bitmap)
-            bitmap.saveInLocalStorage(url)
+            bitmap?.let {
+                setItemImage(it)
+                it.saveInLocalStorage(url)
+            }
         }
 
         private fun setItemImage(bitmap: Bitmap) = CoroutineScope(Dispatchers.Main).launch {

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.cinema.emovie.common.ErrorHandler
 import com.cinema.emovie.databinding.ActivityHomeBinding
 import com.cinema.emovie.domain.model.Movie
 import com.cinema.emovie.ui.home.adapter.HorizontalMovieAdapter
@@ -71,9 +72,7 @@ class HomeActivity : AppCompatActivity() {
                 is HomeStatus.SuccessGetUpcoming -> setUpcomingData(it.movies)
                 is HomeStatus.SuccessGetTopRated -> setTopRatedData(it.movies)
                 is HomeStatus.SuccessGetTrending -> setTrendingData(it.movies)
-                is HomeStatus.Error -> {
-                    //TODO: Pendiente hacer implementacion de errorView
-                }
+                is HomeStatus.Error -> showError(it.exception)
             }
         }
     }
@@ -143,4 +142,7 @@ class HomeActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun showError(exception: Exception) {
+        ErrorHandler.showErrorMessage(exception, this, binding.root)
+    }
 }

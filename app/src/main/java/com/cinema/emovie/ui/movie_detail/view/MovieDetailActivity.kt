@@ -59,9 +59,7 @@ class MovieDetailActivity : AppCompatActivity() {
             when (it) {
                 is MovieDetailStatus.SuccessGetGenre -> setGenreData(it.genres)
                 is MovieDetailStatus.SuccessGetTrailer -> setTrailerData(it.trailer)
-                is MovieDetailStatus.Error -> {
-                    //TODO: Pendiente implementar esto
-                }
+                is MovieDetailStatus.Error -> showError(it.exception)
             }
         }
     }
@@ -142,6 +140,10 @@ class MovieDetailActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW, url)
             startActivity(intent)
         }
+    }
+
+    private fun showError(exception: Exception) {
+        ErrorHandler.showErrorMessage(exception, this, binding.root)
     }
 
 }

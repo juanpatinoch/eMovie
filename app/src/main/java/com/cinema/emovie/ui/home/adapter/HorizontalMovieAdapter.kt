@@ -35,6 +35,8 @@ class HorizontalMovieAdapter(
         fun bind(position: Int) = with(binding) {
             val item = getItem(position)
 
+            imageViewPoster.clear(context)
+
             val startMargin = if (position == 0) 25 else 0
             val endMargin = if (position == itemCount - 1) 25 else 16
 
@@ -55,8 +57,10 @@ class HorizontalMovieAdapter(
 
         private fun getBitmapImage(url: String) = CoroutineScope(Dispatchers.IO).launch {
             val bitmap = url.toBitmap(context)
-            setItemImage(bitmap)
-            bitmap.saveInLocalStorage(url)
+            bitmap?.let {
+                setItemImage(it)
+                it.saveInLocalStorage(url)
+            }
         }
 
         private fun setItemImage(bitmap: Bitmap) = CoroutineScope(Dispatchers.Main).launch {

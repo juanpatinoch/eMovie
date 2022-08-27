@@ -4,6 +4,7 @@ import com.cinema.emovie.common.network.ApiResponse
 import com.cinema.emovie.data.model.ApiKeyModel
 import com.cinema.emovie.data.model.MovieListModel
 import com.cinema.emovie.data.network.ApiServices
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class TopRatedDataSource @Inject constructor(
@@ -21,7 +22,7 @@ class TopRatedDataSource @Inject constructor(
                         ApiResponse.Success(body() as MovieListModel)
                     }
                     else -> {
-                        ApiResponse.Failure(errorBody() as Exception)
+                        ApiResponse.Failure(this as HttpException)
                     }
                 }
             }

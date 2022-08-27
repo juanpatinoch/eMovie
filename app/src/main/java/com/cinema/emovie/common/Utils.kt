@@ -18,8 +18,10 @@ fun Int.toDP(context: Context) = TypedValue.applyDimension(
         .displayMetrics
 ).toInt()
 
-fun String.toBitmap(context: Context): Bitmap {
-    return Glide.with(context).asBitmap().load(this).submit().get()
+fun String.toBitmap(context: Context): Bitmap? = try {
+    Glide.with(context).asBitmap().load(this).submit().get()
+} catch (e: Exception) {
+    null
 }
 
 fun String.getFromLocalStorage(): Bitmap? {
@@ -35,6 +37,11 @@ fun ImageView.loadFromBitmap(context: Context, bitmap: Bitmap) {
         .load(bitmap)
         .centerCrop()
         .into(this)
+}
+
+fun ImageView.clear(context: Context) {
+    Glide.with(context)
+        .clear(this)
 }
 
 fun TextView.showText(text: String?) {
@@ -58,7 +65,3 @@ fun String.getYear(): String? {
 }
 
 fun Double.toOneDecimal() = String.format("%.1f", this).replace(",", ".")
-
-fun String.openYoutubeVideo(){
-
-}
