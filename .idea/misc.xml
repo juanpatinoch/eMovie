@@ -4,12 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/drawable-night/background_image_gradient.xml" value="0.152" />
+        <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/drawable-night/background_splash_gradient.xml" value="0.152" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/drawable-night/radio_button_unselected.xml" value="0.152" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/drawable-night/text_color_selector.xml" value="0.152" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/drawable/app_bar_background.xml" value="0.152" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/drawable/background_button.xml" value="0.1625" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/drawable/background_image_gradient.xml" value="0.152" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/drawable/background_image_gradient_night.xml" value="0.152" />
+        <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/drawable/background_splash_gradient.xml" value="0.152" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/drawable/background_text_gray.xml" value="0.152" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/drawable/background_text_yellow.xml" value="0.152" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/drawable/button_selected.xml" value="0.152" />
@@ -23,6 +25,7 @@
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/layout/activity_home.xml" value="0.24676445211389128" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/layout/activity_movie_detail.xml" value="0.29791666666666666" />
+        <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/layout/activity_splash.xml" value="0.14895833333333333" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/layout/item_horizontal_movie.xml" value="0.1" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/layout/item_poster.xml" value="0.14895833333333333" />
         <entry key="..\:/Users/diegopc/Source/eMovie/app/src/main/res/layout/item_vertical_movie.xml" value="0.1" />
