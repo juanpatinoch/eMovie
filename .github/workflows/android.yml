@@ -1,4 +1,4 @@
-name: Build & Publish Release APK
+name: Build & Publish Debug APK
 
 on:
   push:
@@ -26,15 +26,15 @@ jobs:
     - name: Run Tests
       run: bash ./gradlew test --stacktrace
       
-    - name: Build Release APK
-      run: ./gradlew assembleRelease
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug
       
-    - name: Create release and upload apk
+    - name: Create debug and upload apk
       uses: underwindfall/create-release-with-debugapk@v2.0.0
       env:
        GITHUB_TOKEN: ${{ secrets.TOKEN }}
       with:
        tag_name: ${{ github.ref }}
-       asset_path: app/build/outputs/apk/release/app-release-unsigned.apk
-       asset_name: e_movie_release.apk
+       asset_path: app/build/outputs/apk/debug/app-debug.apk
+       asset_name: app-debug.apk
        asset_content_type: application/zip
