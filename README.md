@@ -32,12 +32,15 @@ Puedes descargar el archivo [APK]() en tu teléfono para instalar la app directa
 
 ## Preguntas
 **1. ¿En qué consiste el principio de responsabilidad única? ¿Cuál es su propósito?**
+
 Es el primero de los cinco principios SOLID. Consiste en que un objeto sea encargado de hacer una sola cosa. Y el propósito de este principio es que tengamos clases con menos líneas de código, que sea fácil de entender, que sea fácil de testear, que sea fácil de modificar, en pocas palabras nos facilita mucho el trabajo.
 
 **2. ¿Qué características tiene, según su opinión, un “buen” código o código limpio?**
+
 Clean code es un concepto que abarca un conjunto de buenas prácticas que hacen que nuestro código se vea organizado y sea fácil de entender. Si lo llevamos a cabo de manera correcta, podemos evitarnos muchas cosas, como por ejemplo, tener que documentar mucha parte del código que escribimos. Algunas de las características más importantes que encuentro son:
 Nombrar variables y funciones correctamente, evitar funciones con muchas líneas de código, evitar funciones con muchos parámetros, evitar acoplamiento entre clases, no repetir código, hacer tests (esto nos ayuda a tener un código más limpio)
 
 **3. Detalla cómo harías todo aquello que no hayas llegado a completar.**
+
 Creo que se cumplió con todos los puntos propuestos en el ejercicio.
 Aunque considero que se puede hacer una muy buena mejora en la capa de Data, creando una clase modelo abstracta utilizando el concepto de polimorfismo, ya que otras clases podrían heredar de esta y utilizar sus funciones y propiedades que son muy similares entre sí.
