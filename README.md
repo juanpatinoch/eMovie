@@ -28,7 +28,7 @@ Cuenta con la opción de utilizar `LightTheme` y `DarkTheme`.
  - [Mockk](https://mockk.io/) - Librería especializada para realizar tests con Kotlin.
  
 ## Instalación
-Puedes descargar el archivo [APK]() en tu teléfono para instalar la app directamente.
+Puedes descargar el archivo [APK](https://github.com/juanpatinoch/eMovie/releases/download/refs%2Fheads%2Fmaster/app-debug.apk) en tu teléfono para instalar la app directamente.
 
 ## Preguntas
 **1. ¿En qué consiste el principio de responsabilidad única? ¿Cuál es su propósito?**
